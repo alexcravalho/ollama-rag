@@ -8,7 +8,8 @@
     "clean": "rm -rf dist",
     "build": "tsc && tsc-alias",
     "ingest": "node dist/cli/ingest.js",
-    "ingest:reset": "npm run build && node dist/cli/ingest.js --reset",
+    "chroma:start": "./chroma.sh",
+    "chroma:reset": "./chroma.sh -r",
     "query": "npm run build && node dist/cli/query.js",
     "format": "prettier --write .",
     "lint": "eslint . --ext .ts"
