@@ -1,7 +1,7 @@
 import * as crypto from 'crypto';
 // import { ChromaClient } from 'chromadb';
 import { OllamaEmbeddingFunction } from '@chroma-core/ollama';
-import { CHROMA_PATH, CHROMA_URL, COLLECTION_NAME } from '../config/constants.js';
+import { COLLECTION_NAME } from '../config/constants.js';
 import { Document } from '@langchain/core/documents';
 import { calculateChunkIds } from '../utils/chunkUtils.js';
 import { client } from './client.js';
@@ -18,6 +18,7 @@ export async function addToChroma(chunks: Document[]) {
   let collection: Collection;
 
   try {
+    // TODO: replace with getOrCreateCollection ?
     collection = await client.getCollection({
       name: COLLECTION_NAME,
       embeddingFunction: embedder,
