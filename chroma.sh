@@ -1,4 +1,8 @@
 DATA_DIR="$(pwd)/chroma"
+TEMP_CONFIG=$(mktemp)
+
+echo "allow_reset: true" > "$TEMP_CONFIG"
+
 DETACH=false
 RESET=false
 
@@ -37,6 +41,7 @@ if [ "$DETACH" = true ]; then
     --name chromadb \
     -p 8000:8000 \
     -v "$DATA_DIR:/data" \
+    -v "$TEMP_CONFIG:/config.yaml" \
     ghcr.io/chroma-core/chroma:latest
 else
   echo "🚀 Running ChromaDB in foreground (logs will be shown)..."
@@ -44,5 +49,8 @@ else
     --name chromadb \
     -p 8000:8000 \
     -v "$DATA_DIR:/data" \
+    -v "$TEMP_CONFIG:/config.yaml" \
     ghcr.io/chroma-core/chroma:latest
 fi
+
+rm "$TEMP_CONFIG"
