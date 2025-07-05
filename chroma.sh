@@ -1,5 +1,3 @@
-#!/bin/bash
-
 DATA_DIR="$(pwd)/chroma"
 DETACH=false
 RESET=false
@@ -7,7 +5,7 @@ RESET=false
 # Parse arguments
 for arg in "$@"; do
   case $arg in
-    --reset)
+    -r|--reset)
       RESET=true
       ;;
     -d|--detach)
@@ -38,13 +36,13 @@ if [ "$DETACH" = true ]; then
   docker run -d \
     --name chromadb \
     -p 8000:8000 \
-    -v "$DATA_DIR:/chroma/chroma" \
+    -v "$DATA_DIR:/data" \
     ghcr.io/chroma-core/chroma:latest
 else
   echo "🚀 Running ChromaDB in foreground (logs will be shown)..."
   docker run --rm -it \
     --name chromadb \
     -p 8000:8000 \
-    -v "$DATA_DIR:/chroma/chroma" \
+    -v "$DATA_DIR:/data" \
     ghcr.io/chroma-core/chroma:latest
 fi
