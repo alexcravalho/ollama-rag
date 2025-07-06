@@ -53,4 +53,8 @@ else
     ghcr.io/chroma-core/chroma:latest
 fi
 
-rm "$TEMP_CONFIG"
+# Clean up config file AFTER container starts (only for detached mode)
+if [ "$DETACH" = true ]; then
+  sleep 1
+  rm "$CONFIG_FILE"
+fi
