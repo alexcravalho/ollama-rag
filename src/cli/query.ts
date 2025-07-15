@@ -41,7 +41,7 @@ async function main() {
 
   const results = await collection.query({
     queryTexts: [queryText],
-    nResults: 5,
+    nResults: 10,
   });
 
   if (!results.documents?.length || results.documents[0].length === 0) {
