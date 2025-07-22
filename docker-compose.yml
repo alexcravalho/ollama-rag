@@ -1,0 +1,26 @@
+version: '3.8'
+services:
+  rag-app:
+    build: .
+    container_name: rag-app
+    ports:
+      - 9000:9000
+    volumes:
+      - ./data:/app/data
+    networks:
+      - otacon-network
+  chromadb:
+    image: ghcr.io/chroma-core/chroma:latest
+    container_name: chromadb
+    ports:
+      - 8000:8000
+    volumes:
+      - ./chroma:/data
+      - ./config.yaml:/config.yaml
+    networks:
+      - otacon-network
+    restart: unless-stopped
+
+networks:
+  otacon-network:
+    external: true

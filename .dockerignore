@@ -1,0 +1,17 @@
+# Ignore everything except dist/ and production essentials
+node_modules
+src
+scripts
+*.ts
+*.sh
+*.log
+.env
+config.yaml
+.eslintrc*
+.prettier*
+tsconfig.json
+chroma
+data
+.git
+.vscode
+README.md
